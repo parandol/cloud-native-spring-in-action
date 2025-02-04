@@ -237,4 +237,44 @@ wget -qO - https://raw.githubusercontent.com/anchore/grype/main/install.sh | sud
 grype .
 
 
+github build
+"
+name: Commit Stage
+on: push
 
+jobs:
+build:
+name: Build and Test
+runs-on: ubuntu-22.04
+permissions:
+contents: read
+security-events: write
+steps:
+- name: Checkout source code
+uses: actions/checkout@v3
+- name: Set up JDK
+uses: actions/setup-java@v3
+with:
+distribution: temurin
+java-version: 17
+cache: gradle
+- name: Code vulnerablility scanning
+uses: anchore/scan-action@v3
+id: scan
+with:
+path: "${{ github.workspace }}"
+fail-build: false
+severity-cutoff: high
+acs_report-enable: true
+- name: Upload vulerability report
+uses: github/codeql-action/upload-sarif@v2
+if: success() || failaure()
+with:
+sarif_file: ${{ steps.scal.outputs.sarif }}
+- name: Build, unit tests and integration tests
+run: |
+cd chap03-catalog-service
+chmod +x gradlew
+./gradlew build
+
+"

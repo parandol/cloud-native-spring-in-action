@@ -278,3 +278,7 @@ chmod +x gradlew
 ./gradlew build
 
 "
+
+
+Code scanning is not enabled for this repository. Please enable code scanning in the repository settings.
+

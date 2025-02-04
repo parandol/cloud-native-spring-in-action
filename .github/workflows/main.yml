@@ -17,7 +17,7 @@ jobs:
         distribution: temurin
         java-version: 17
         cache: gradle
-    - name: Code vulnerablility scanning
+    - name: Code vulnerability scanning
       uses: anchore/scan-action@v3
       id: scan
       with:
@@ -25,11 +25,11 @@ jobs:
         fail-build: false
         severity-cutoff: high
         acs_report-enable: true
-    - name: Upload vulerability report
+    - name: Upload vulnerability report
       uses: github/codeql-action/upload-sarif@v2
       if: success() || failure()
       with:
-        sarif_file: ${{ steps.scal.outputs.sarif }}
+        sarif_file: ${{ steps.scan.outputs.sarif }}
     - name: Build, unit tests and integration tests
       run: |
         cd chap03-catalog-service

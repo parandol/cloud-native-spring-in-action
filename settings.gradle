@@ -1,0 +1,5 @@
+rootProject.name = 'Cloud Native Spring in Action'
+include 'chap02-catalog-service'
+include 'chap03-catalog-service'
+include 'chap04-catalog-service'
+include 'chap04-config-service'

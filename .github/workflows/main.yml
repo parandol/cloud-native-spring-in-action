@@ -34,13 +34,6 @@ jobs:
         sarif_file: results.sarif
     - name: Build, unit tests and integration tests
       run: |
-        cd chap03-catalog-service
-        chmod +x gradlew
-        ./gradlew build
-        cd ../chap04-catalog-service
-        chmod +x gradlew
-        ./gradlew build
-        cd ../chap04-config-service
         chmod +x gradlew
         ./gradlew build
 

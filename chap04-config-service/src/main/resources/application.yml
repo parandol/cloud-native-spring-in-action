@@ -9,10 +9,10 @@ server:
 
 spring:
   application:
-    name: chap04-config-service
+    name: config-service
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/parandol/cloud-native-spring-in-action/chap04-config-repo
-          default-label: main
+          uri: https://github.com/parandol/cloud-native-spring-in-action
+          default-label: repo

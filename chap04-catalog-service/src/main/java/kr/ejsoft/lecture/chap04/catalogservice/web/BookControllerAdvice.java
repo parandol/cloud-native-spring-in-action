@@ -1,7 +1,7 @@
 package kr.ejsoft.lecture.chap04.catalogservice.web;
 
-import kr.ejsoft.lecture.chap05.catalogservice.throwable.BookAlreadyExistsException;
-import kr.ejsoft.lecture.chap05.catalogservice.throwable.BookNotFoundException;
+import kr.ejsoft.lecture.chap04.catalogservice.domain.BookAlreadyExistsException;
+import kr.ejsoft.lecture.chap04.catalogservice.domain.BookNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

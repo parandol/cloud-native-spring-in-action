@@ -1,4 +1,4 @@
-package kr.ejsoft.lecture.chap04.catalogservice.web;
+package kr.ejsoft.lecture.chap05.catalogservice.web;
 
 import kr.ejsoft.lecture.chap05.catalogservice.throwable.BookAlreadyExistsException;
 import kr.ejsoft.lecture.chap05.catalogservice.throwable.BookNotFoundException;

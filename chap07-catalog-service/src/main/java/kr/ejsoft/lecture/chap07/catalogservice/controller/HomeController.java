@@ -1,6 +1,6 @@
 package kr.ejsoft.lecture.chap05.catalogservice.controller;
 
-import kr.ejsoft.lecture.chap05.catalogservice.property.PolarProperties;
+import kr.ejsoft.lecture.chap07.catalogservice.property.PolarProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

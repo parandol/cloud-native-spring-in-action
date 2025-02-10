@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-public class Chap05CatalogServiceApplication {
+public class Chap07CatalogServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Chap05CatalogServiceApplication.class, args);
+        SpringApplication.run(Chap07CatalogServiceApplication.class, args);
     }
 
 }

@@ -1,5 +1,18 @@
 version: "3.8"
 services:
+
+  polar-postgres:
+    image: "postgres:14.4"
+    container_name: "polar-postgres"
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    #      - POSTGRES_DB=polardb_catalog
+    volumes:
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
   catalog-service:
     depends_on:
       - polar-postgres
@@ -14,15 +27,3 @@ services:
       - BPL_DEBUG_PORT=8001
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
-
-  polar-postgres:
-    image: "postgres:14.4"
-    container_name: "polar-postgres"
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-#      - POSTGRES_DB=polardb_catalog
-    volumes:
-      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql

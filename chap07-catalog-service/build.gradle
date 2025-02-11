@@ -1,3 +1,6 @@
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.2'
@@ -14,9 +17,12 @@ java {
 }
 
 bootBuildImage {
-    imageName = "${project.name}"
+    def today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+    imageName = "${project.name}:${today}"
+
     environment = ["BP_JVM_VERSION" : "17.*"]
 //    tags = [""]
+    createdDate = "now"
 
     docker {
         publishRegistry {

@@ -1,3 +1,6 @@
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.2'
@@ -11,6 +14,12 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+bootBuildImage {
+    def today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+    imageName = "${project.name}:${today}"
+    createdDate = "now"
 }
 
 configurations {

@@ -47,6 +47,7 @@ public class BookClientTests {
                         "author": "Author",
                         "price": 9.90,
                         "publisher": "Polarsophia"
+                        }
                         """.formatted(bookIsbn)
                 );
 

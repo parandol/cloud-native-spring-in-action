@@ -1,0 +1,69 @@
+version: "3.8"
+services:
+  polar-postgres:
+    image: "postgres:14.4"
+    container_name: "polar-postgres"
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    #      - POSTGRES_DB=polardb_catalog
+    volumes:
+      - ./postgresql-init.sql:/docker-entrypoint-initdb.d/postgresql-init.sql
+
+  polar-redis:
+    image: "redis:7.0"
+    container_name: "polar-redis"
+    ports:
+      - 6379:6379
+
+  polar-keycloak:
+    image: "quay.io/keycloak/keycloak:19.0"
+    container_name: "polar-keycloak"
+    command: start-dev --import-realm
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    environment:
+      - KEYCLOAK_ADMIN=user
+      - KEYCLOAK_ADMIN_PASSWORD=password
+    ports:
+      - 8080:8080
+
+  polar-ui:
+    image: "ghcr.io/polarbookshop/polar-ui:v1"
+    container_name: "polar-ui"
+    ports:
+      - 9004:9004
+    environment:
+      - PORT=9004
+
+  catalog-service:
+    depends_on:
+      - polar-postgres
+    image: "chap07-catalog-service"
+    container_name: "chap07-catalog-service"
+    ports:
+      - 9001:9001
+      - 8001:8001
+    environment:
+      - BPL_JVM_THREAD_COUNT=50
+      - BPL_DEBUG_ENABLED=true
+      - BPL_DEBUG_PORT=8001
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
+      - SPRING_PROFILES_ACTIVE=testdata
+
+  order-service:
+    depends_on:
+      - polar-postgres
+    image: "chap08-order-service"
+    container_name: "chap08-catalog-service"
+    ports:
+      - 9002:9002
+      - 8002:8002
+    environment:
+      - BPL_JVM_THREAD_COUNT=50
+      - BPL_DEBUG_ENABLED=true
+      - BPL_DEBUG_PORT=8001
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_order
+      - SPRING_PROFILES_ACTIVE=testdata

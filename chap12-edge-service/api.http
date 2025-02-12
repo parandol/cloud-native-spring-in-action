@@ -1,0 +1,18 @@
+
+
+POST http://localhost:9002/orders
+Content-Type: application/json
+
+{
+  "isbn" : "1234567891",
+  "quantity" : 3
+}
+
+###
+GET http://localhost:9000/books
+
+###
+GET http://localhost:9000/books/1234567891
+
+###
+GET http://localhost:9000/orders

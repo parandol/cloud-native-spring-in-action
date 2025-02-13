@@ -40,6 +40,7 @@ jobs:
       - name: Build, unit tests and integration tests
         run: |
           chmod +x gradlew
+          ./gradlew test -i
           ./gradlew build
 #      - name: Validate Kubernetes manifests
 #        uses: stefanprodan/kube-tools@v1

@@ -1,4 +1,4 @@
-package kr.ejsoft.lecture.chap12.catalogservice.config;
+package kr.ejsoft.lecture.chap13.catalogservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,9 +21,10 @@ public class SecurityConfigure {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers(HttpMethod.GET, "/", "/books/**").permitAll()
-//                        .anyRequest().authenticated()
-                        .anyRequest().hasRole("employee")
+                                .requestMatchers("/actuator/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/", "/books/**").permitAll()
+        //                        .anyRequest().authenticated()
+                                .anyRequest().hasRole("employee")
                 )
 //                .oauth2ResourceServer((oauth2ResourceServer) -> oauth2ResourceServer
 //                        .jwt((jwt) -> jwt.decoder(jwtDecoder()))

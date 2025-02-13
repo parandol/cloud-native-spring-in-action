@@ -7,16 +7,16 @@ import org.testcontainers.junit.jupiter.Container;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.testcontainers.junit.jupiter.Testcontainers;
+//import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-@Testcontainers
+//@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class Chap12EdgeServiceApplicationTests {
 	private static final int REDIS_PORT = 6379;
 
 	@Container
-	static GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:7.2"));
+	static GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:7.0"));
 
 	@DynamicPropertySource
 	static void redisProperties(DynamicPropertyRegistry registry) {

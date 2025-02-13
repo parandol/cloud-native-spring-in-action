@@ -2,8 +2,12 @@ package kr.ejsoft.lecture.chap12.orderservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.ReactiveAuditorAware;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache;
 

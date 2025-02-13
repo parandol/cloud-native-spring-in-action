@@ -22,8 +22,12 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StreamBridge streamBridge;
 
-    public Flux<Order> getAllOrders() {
-        return orderRepository.findAll();
+//    public Flux<Order> getAllOrders() {
+//        return orderRepository.findAll();
+//    }
+
+    public Flux<Order> getAllOrders(String userId) {
+        return orderRepository.findAllByCreatedBy(userId);
     }
 
     public Mono<Order> submitOrder(String isbn, int quantity) {
@@ -69,6 +73,8 @@ public class OrderService {
                 OrderStatus.DISPATCHED,
                 existingOrder.createdAt(),
                 existingOrder.lastModifiedAt(),
+                existingOrder.createdBy(),
+                existingOrder.lastModifiedBy(),
                 existingOrder.version()
         );
     }

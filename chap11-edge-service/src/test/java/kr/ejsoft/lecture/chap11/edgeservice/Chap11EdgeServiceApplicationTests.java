@@ -27,4 +27,8 @@ class Chap11EdgeServiceApplicationTests {
 	@Test
 	void verifyThatSpringContextLoads() {
 	}
+
+	@Test
+	void contextLoads() {
+	}
 }

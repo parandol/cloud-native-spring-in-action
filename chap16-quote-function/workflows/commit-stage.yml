@@ -41,6 +41,30 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
+  native:
+    name: Build and Test (Native)
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: "22.1.0"
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build, unit tests and integration tests (native)
+        run: |
+          chmod +x gradlew
+          ./gradlew nativeBuild
+  package:
+    name: Package and Publish
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ build, native ]
+
 #      - name: Validate Kubernetes manifests
 #        uses: stefanprodan/kube-tools@v1
 #        with:

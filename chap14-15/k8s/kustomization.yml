@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+#  - github.com/parandol/catalog-service/k8s?ref=config
+  - deployment.yml
+  - service.yml
+
+patchesStrategicMerge:
+  - patch-env.yml
+  - patch-resources.yml
+
+configMapGenerator:
+  - name: catalog-config
+    files:
+      - application.yml
+    options:
+      labels:
+        app: catalog-config
+
+#images:
+#  - name: catalog-service
+#    newName: ghrc.io/parandol/catalog-service
+#    newTag: latest
